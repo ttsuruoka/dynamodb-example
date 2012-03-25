@@ -2,11 +2,15 @@
 // アプリケーション
 require_once APP_DIR.'app_controller.php';
 require_once APP_DIR.'app_model.php';
+require_once APP_DIR.'app_layout_view.php';
 require_once APP_DIR.'app_exception.php';
 
 require_once HELPERS_DIR.'html_helper.php';
 
 require_once VENDOR_DIR.'SimpleAmazon/SimpleAmazonDynamoDB.php';
+
+require_once CONFIG_DIR.'router.php';
+require_once CONFIG_DIR.'dynamo.php';
 
 // autoload
 spl_autoload_register(function($name) {
