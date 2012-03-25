@@ -1,2 +1,4 @@
 app/config/core.php
+app/config/aws_key.php
+app/config/aws_sts_key.php
 app/tmp/logs/*.log

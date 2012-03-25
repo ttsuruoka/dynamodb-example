@@ -1,0 +1,64 @@
+#!/usr/bin/env php
+<?php
+require_once __DIR__.'/bootstrap.php';
+require_once VENDOR_DIR.'SimpleAmazon/SimpleAmazonDynamoDB.php';
+require_once CONFIG_DIR.'dynamo.php';
+require_once CONFIG_DIR.'aws_sts_key.php';
+
+function main($argc, $argv)
+{
+    $tables = array(
+        array(
+            'TableName' => 'thread',
+            'KeySchema' => array(
+                'HashKeyElement' => array(
+                    'AttributeName' => 'id',
+                    'AttributeType' => 'N',
+                ),
+                'RangeKeyElement' => array(
+                    'AttributeName' => 'updated',
+                    'AttributeType' => 'N',
+                ),
+            ),
+            'ProvisionedThroughput' => array(
+                'ReadCapacityUnits' => 5,
+                'WriteCapacityUnits' => 5,
+            ),
+        ),
+        array(
+            'TableName' => 'post',
+            'KeySchema' => array(
+                'HashKeyElement' => array(
+                    'AttributeName' => 'thread_id',
+                    'AttributeType' => 'N',
+                ),
+                'RangeKeyElement' => array(
+                    'AttributeName' => 'created',
+                    'AttributeType' => 'N',
+                ),
+            ),
+            'ProvisionedThroughput' => array(
+                'ReadCapacityUnits' => 5,
+                'WriteCapacityUnits' => 5,
+            ),
+        ),
+    );
+
+    $db = Dynamo::conn();
+
+    foreach ($tables as $params) {
+        $r = $db->call('CreateTable', $params);
+        if ($db->status_code != 200) {
+            if ($db->status_code == 400) {
+                if (strpos($r['__type'], 'ResourceInUseException') !== false) {
+                    // skip if table already exists
+                    continue;
+                }
+            }
+            print_r($r);
+            exit(1);
+        }
+    }
+}
+
+main($argc, $argv);

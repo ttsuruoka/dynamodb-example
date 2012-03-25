@@ -6,6 +6,8 @@ require_once APP_DIR.'app_exception.php';
 
 require_once HELPERS_DIR.'html_helper.php';
 
+require_once VENDOR_DIR.'SimpleAmazon/SimpleAmazonDynamoDB.php';
+
 // autoload
 spl_autoload_register(function($name) {
     $filename = Inflector::underscore($name) . '.php';

@@ -1,0 +1,30 @@
+#!/usr/bin/env php
+<?php
+require_once __DIR__.'/bootstrap.php';
+require_once VENDOR_DIR.'SimpleAmazon/SimpleAmazonSTS.php';
+require_once CONFIG_DIR.'aws_key.php';
+
+define('AWS_STS_KEY_FILENAME', CONFIG_DIR.'aws_sts_key.php');
+
+function main($argc, $argv)
+{
+    $sts = new SimpleAmazonSTS(AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY);
+    $r = $sts->call('GetSessionToken', array('DurationSeconds' => 3600));
+    $c = $r['GetSessionTokenResult']['Credentials'];
+
+    if ($sts->status_code != 200) {
+        exit(1);
+    }
+
+    $s = <<< EOT
+<?php
+// Expiration: {$c['Expiration']}
+define('AWS_STS_ACCESS_KEY_ID', '{$c['AccessKeyId']}');
+define('AWS_STS_SECRET_ACCESS_KEY', '{$c['SecretAccessKey']}');
+define('AWS_STS_SESSION_TOKEN', '{$c['SessionToken']}');
+EOT;
+
+    file_put_contents(AWS_STS_KEY_FILENAME, $s, LOCK_EX);
+}
+
+main($argc, $argv);
