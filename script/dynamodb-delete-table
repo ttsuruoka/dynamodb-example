@@ -1,0 +1,19 @@
+#!/usr/bin/env php
+<?php
+require_once __DIR__.'/bootstrap.php';
+require_once VENDOR_DIR.'SimpleAmazon/SimpleAmazonDynamoDB.php';
+require_once CONFIG_DIR.'dynamo.php';
+require_once CONFIG_DIR.'aws_sts_key.php';
+
+function main($argc, $argv)
+{
+    $tables = array('thread', 'post');
+
+    $db = Dynamo::conn();
+
+    foreach ($tables as $v) {
+        $db->call('DeleteTable', array('TableName' => $v));
+    }
+}
+
+main($argc, $argv);
