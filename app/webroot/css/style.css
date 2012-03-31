@@ -1,0 +1,14 @@
+body {
+padding-top: 60px;
+}
+
+.post {
+margin-bottom:1em;
+}
+
+#dynamo-log div {
+border:1px solid #ccc;
+border-bottom-color:#b3b3b3;
+border-radius:4px;
+padding:4px 10px;
+}

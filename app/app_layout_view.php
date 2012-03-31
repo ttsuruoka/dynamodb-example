@@ -18,7 +18,7 @@ class AppLayoutView extends View
         // render layout
         $layout_filename = VIEWS_DIR . 'layouts/' . $this->layout . self::$ext;
         $vars = array(
-            'page_title' => $this->page_titme,
+            'page_title' => $this->page_title,
             'content' => $content,
         );
         $this->controller->output .= self::extract($layout_filename, array_merge($this->vars, $vars));

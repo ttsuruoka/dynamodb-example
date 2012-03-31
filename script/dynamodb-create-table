@@ -15,10 +15,6 @@ function main($argc, $argv)
                     'AttributeName' => 'id',
                     'AttributeType' => 'N',
                 ),
-                'RangeKeyElement' => array(
-                    'AttributeName' => 'updated',
-                    'AttributeType' => 'N',
-                ),
             ),
             'ProvisionedThroughput' => array(
                 'ReadCapacityUnits' => 5,
