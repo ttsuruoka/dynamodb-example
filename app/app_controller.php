@@ -10,6 +10,8 @@ class AppController extends Controller
         } catch (DynamoException $e) {
             $this->set('e', $e);
             $this->render('errors/dynamo');
+        } catch (NotFoundException $e) {
+            $this->render('errors/not_found');
         }
     }
 }
