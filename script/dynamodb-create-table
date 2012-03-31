@@ -42,17 +42,15 @@ function main($argc, $argv)
 
     $db = Dynamo::conn();
 
-    foreach ($tables as $params) {
-        $r = $db->call('CreateTable', $params);
-        if ($db->status_code != 200) {
-            if ($db->status_code == 400) {
-                if (strpos($r['__type'], 'ResourceInUseException') !== false) {
-                    // skip if table already exists
-                    continue;
-                }
+    foreach ($tables as $v) {
+        try {
+            $db->call('CreateTable', $v);
+        } catch (DynamoException $e) {
+            if (strpos($e->getMessage(), 'ResourceInUseException') !== false) {
+                // skip if table already exists
+                continue;
             }
-            print_r($r);
-            exit(1);
+            throw $e;
         }
     }
 }

@@ -8,18 +8,13 @@ require_once CONFIG_DIR.'aws_sts_key.php';
 function main($argc, $argv)
 {
     $db = Dynamo::conn();
+
     $r = $db->call('ListTables');
-    if ($db->status_code != 200) {
+    $table_names = $r['TableNames'];
+
+    foreach ($table_names as $v) {
+        $r = $db->call('DescribeTable', array('TableName' => $v));
         print_r($r);
-        exit(1);
-    }
-    foreach ($r['TableNames'] as $table_name) {
-        $r = $db->call('DescribeTable', array('TableName' => $table_name));
-        if ($db->status_code != 200) {
-            print_r($r);
-            exit(1);
-        }
-        var_dump($r);
     }
 
 }
