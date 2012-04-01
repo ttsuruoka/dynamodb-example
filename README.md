@@ -15,9 +15,11 @@ Install
 
 1. Set up your core.php and aws_key.php:
 
+    ```
     $ cd app/config/
     $ cp core_production.php core.php
     $ cp aws_key_example.php aws_key.php
+    ```
 
 2. Edit your AWS_ACCESS_KEY_ID/AWS_SECRET_ACCESS_KEY to use the Amazon Web Services.
 
