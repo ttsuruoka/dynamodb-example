@@ -25,13 +25,16 @@ Install
 
 3. Get the temporary credentials using AWS Security Token Service:
 
+    ```
     $ cd dynamo-example
     $ ./script/sts-get-key
+    ```
 
     *Note:* The temporary credentials expire every hour in this example.
 
 4. Edit your httpd.conf:
 
+    ```
     # dynamodb-example
     <VirtualHost *:80>
         ServerName dynamodb.example.jp
@@ -43,6 +46,7 @@ Install
             AllowOverride All
         </Directory>
     </VirtualHost>
+    ```
 
 5. Restart your httpd service and you can access your dynamodb-example.
 
