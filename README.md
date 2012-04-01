@@ -15,38 +15,32 @@ Install
 
 1. Set up your core.php and aws_key.php:
 
-```
-$ cd app/config/
-$ cp core_production.php core.php
-$ cp aws_key_example.php aws_key.php
-```
+    $ cd app/config/
+    $ cp core_production.php core.php
+    $ cp aws_key_example.php aws_key.php
 
 2. Edit your AWS_ACCESS_KEY_ID/AWS_SECRET_ACCESS_KEY to use the Amazon Web Services.
 
 3. Get the temporary credentials using AWS Security Token Service:
 
-```
-$ cd dynamo-example
-$ ./script/sts-get-key
-```
+    $ cd dynamo-example
+    $ ./script/sts-get-key
 
-*Note:* The temporary credentials expire every hour in this example.
+    *Note:* The temporary credentials expire every hour in this example.
 
 4. Edit your httpd.conf:
 
-```
-# dynamodb-example
-<VirtualHost *:80>
-    ServerName dynamodb.example.jp
-    DocumentRoot /home/example/dynamodb-example/app/webroot
-    <Directory /home/example/dynamodb-example/app/webroot>
-        Order Allow,Deny
-        Allow from all
-        Options FollowSymlinks
-        AllowOverride All
-    </Directory>
-</VirtualHost>
-```
+    # dynamodb-example
+    <VirtualHost *:80>
+        ServerName dynamodb.example.jp
+        DocumentRoot /home/example/dynamodb-example/app/webroot
+        <Directory /home/example/dynamodb-example/app/webroot>
+            Order Allow,Deny
+            Allow from all
+            Options FollowSymlinks
+            AllowOverride All
+        </Directory>
+    </VirtualHost>
 
 5. Restart your httpd service and you can access your dynamodb-example.
 
