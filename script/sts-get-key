@@ -1,7 +1,6 @@
 #!/usr/bin/env php
 <?php
 require_once __DIR__.'/bootstrap.php';
-require_once VENDOR_DIR.'SimpleAmazon/SimpleAmazonSTS.php';
 require_once CONFIG_DIR.'aws_key.php';
 
 define('AWS_STS_KEY_FILENAME', CONFIG_DIR.'aws_sts_key.php');
