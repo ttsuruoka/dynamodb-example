@@ -8,7 +8,7 @@ require_once APP_DIR.'app_validation.php';
 
 require_once HELPERS_DIR.'html_helper.php';
 
-require_once VENDOR_DIR.'SimpleAmazon/SimpleAmazonDynamoDB.php';
+require_once VENDOR_DIR.'SimpleAmazonDynamoDB/SimpleAmazonDynamoDB.php';
 
 require_once CONFIG_DIR.'router.php';
 require_once CONFIG_DIR.'time.php';

@@ -1,6 +1,6 @@
 [submodule "dietcake"]
 	path = dietcake
 	url = git://github.com/dietcake/dietcake.git
-[submodule "vendor/SimpleAmazon"]
-	path = vendor/SimpleAmazon
-	url = git://github.com/ttsuruoka/SimpleAmazon.git
+[submodule "vendor/SimpleAmazonDynamoDB"]
+	path = vendor/SimpleAmazonDynamoDB
+	url = git://github.com/ttsuruoka/php-simple-amazon-dynamodb.git
